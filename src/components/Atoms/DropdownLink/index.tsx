@@ -15,7 +15,7 @@ const DropdownLink = (props: IDropdownLink) => {
   const { externalLink } = props;
   return (
     <DropdownMenu>
-      <DropdownMenuTrigger className="px-4 py-3 font-medium text-muted-foreground text-sm">
+      <DropdownMenuTrigger className="nav-parent">
         {externalLink?.title}
       </DropdownMenuTrigger>
       <DropdownMenuContent align="start">

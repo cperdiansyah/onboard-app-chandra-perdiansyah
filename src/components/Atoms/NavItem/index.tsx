@@ -10,9 +10,9 @@ const NavItem = ({ item }: INavItem) => {
     <a
       href={item.href}
       className={cn(
-        'text-sm font-medium text-muted-foreground px-4 py-3',
+        'nav-parent',
         item.disabled && 'cursor-not-allowed opacity-80',
-        item.external && 'w-10/12 px-0 py-0'
+        item.external && 'w-10/12 !px-0 !py-0 hover:bg-inherit'
       )}
       target={item?.external ? '_blank' : '_self'}
       rel={item?.external ? 'noreferrer' : ''}

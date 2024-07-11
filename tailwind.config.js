@@ -14,10 +14,10 @@ export default {
       center: true,
       padding: '2rem',
       screens: {
-        sm: '600px',
-        md: '728px',
-        lg: '984px',
-        xl: '1240px',
+        xs: '475px',
+        sm: '640px',
+        md: '768px',
+        lg: '1024px',
         '2xl': '1400px',
       },
     },
@@ -78,5 +78,5 @@ export default {
       },
     },
   },
-plugins: [require("tailwindcss-animate")],
+  plugins: [require('tailwindcss-animate')],
 };

@@ -1,1 +1,12 @@
 @import url(./global.css);
+
+.transition-custom {
+  transition-property: color, background-color, border-color,
+    text-decoration-color, fill, stroke;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 150ms;
+}
+
+.nav-parent {
+  @apply text-sm font-medium text-muted-foreground  px-4 py-3 transition-colors hover:bg-accent rounded-sm;
+}

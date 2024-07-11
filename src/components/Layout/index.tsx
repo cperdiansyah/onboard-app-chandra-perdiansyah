@@ -11,7 +11,7 @@ const Layout: React.FC<LayoutType> = ({ children }) => {
     <>
       <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
         <SiteHeader />
-        {children}
+        <body className="py-5 h-full max-h-screen">{children}</body>
       </ThemeProvider>
       <Meta />
     </>
