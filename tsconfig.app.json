@@ -31,7 +31,8 @@
       "@utils/*": ["./src/utils/*"],
       "@types/*": ["./src/types/*"],
       "@config/*": ["./src/config/*"],
-      "@pages/*": ["./src/pages/*"]
+      "@pages/*": ["./src/pages/*"],
+      "@store/*": ["./src/store/*"]
     }
   },
   "include": ["src"]
