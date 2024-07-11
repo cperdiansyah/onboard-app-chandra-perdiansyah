@@ -8,7 +8,13 @@ importers:
 
   .:
     dependencies:
+      '@fullcalendar/core':
+        specifier: ^6.1.14
+        version: 6.1.14
       '@fullcalendar/daygrid':
+        specifier: ^6.1.14
+        version: 6.1.14(@fullcalendar/core@6.1.14)
+      '@fullcalendar/interaction':
         specifier: ^6.1.14
         version: 6.1.14(@fullcalendar/core@6.1.14)
       '@fullcalendar/react':
@@ -404,6 +410,11 @@ packages:
 
   '@fullcalendar/daygrid@6.1.14':
     resolution: {integrity: sha512-DSyjiA1dEM8k3bOCrZpZOmAOZu71KGtH02ze+4QKuhxkmn/zQghmmLRdfzpOrcyJg6xGKkoB4pBcO+2lXar8XQ==}
+    peerDependencies:
+      '@fullcalendar/core': ~6.1.14
+
+  '@fullcalendar/interaction@6.1.14':
+    resolution: {integrity: sha512-rXum5XCjq+WEPNctFeYL/JKZGeU2rlxrElygocdMegcrIBJQW5hnWWVE+i4/1dOmUKF80CbGVlXUyYXoqK2eFg==}
     peerDependencies:
       '@fullcalendar/core': ~6.1.14
 
@@ -2218,6 +2229,10 @@ snapshots:
       preact: 10.12.1
 
   '@fullcalendar/daygrid@6.1.14(@fullcalendar/core@6.1.14)':
+    dependencies:
+      '@fullcalendar/core': 6.1.14
+
+  '@fullcalendar/interaction@6.1.14(@fullcalendar/core@6.1.14)':
     dependencies:
       '@fullcalendar/core': 6.1.14
 
