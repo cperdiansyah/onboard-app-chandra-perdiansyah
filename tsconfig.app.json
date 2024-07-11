@@ -22,13 +22,15 @@
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true,
-    "baseUrl": "./",
+    "baseUrl": ".",
     "paths": {
       "@/*": ["./*"],
+      "@src/*": ["./src/*"],
       "@components/*": ["./src/components/*"],
       "@styles/*": ["./src/styles/*"],
       "@utils/*": ["./src/utils/*"],
       "@types/*": ["./src/types/*"],
+      "@config/*": ["./src/config/*"],
       "@pages/*": ["./src/pages/*"]
     }
   },

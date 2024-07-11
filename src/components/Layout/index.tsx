@@ -1,10 +1,21 @@
 import React from 'react';
-import { basicTypes } from '@/src/types';
+import { ThemeProvider } from '@components/theme-provider';
+import { basic } from '@src/types';
+import Meta from '@components/Molecules/Meta';
+import { SiteHeader } from '@components/Organisms/Header';
 
-type LayoutType = {} & basicTypes.BasicFCProps;
+type LayoutType = {} & basic.BasicFCProps;
 
 const Layout: React.FC<LayoutType> = ({ children }) => {
-  return <>{children}</>;
+  return (
+    <>
+      <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
+        <SiteHeader />
+        {children}
+      </ThemeProvider>
+      <Meta />
+    </>
+  );
 };
 
 export default Layout;

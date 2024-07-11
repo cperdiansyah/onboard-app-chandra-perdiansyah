@@ -1,3 +1,4 @@
-import * as basicTypes from './basic.ts';
+import * as basic from './basic.ts';
+import * as Nav from './nav.ts'
 
-export { basicTypes };
+export { basic, Nav };
