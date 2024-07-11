@@ -1,36 +1,19 @@
 import { Nav } from '@/src/types';
-import { cn } from '@src/lib/utils';
+import DropdownLink from '@components/Atoms/DropdownLink';
+import NavList from '@components/Molecules/NavList';
 
 interface MainNavProps {
   items?: Nav.NavItem[];
+  externalLinks?: Nav.DropdownLinkType;
 }
 
-export function MainNav({ items }: MainNavProps) {
+export function MainNav({ items, externalLinks }: MainNavProps) {
   return (
     <div className="flex gap-6 md:gap-10">
-      <NavItem items={items} />
+      <nav className="flex items-center gap-6">
+        <NavList items={items} />
+        <DropdownLink externalLink={externalLinks} />
+      </nav>
     </div>
-  );
-}
-
-export function NavItem({ items }: MainNavProps) {
-  return (
-    <nav className="flex gap-6">
-      {items?.map(
-        (item, index) =>
-          item.href && (
-            <a
-              key={index}
-              href={item.href}
-              className={cn(
-                'flex items-center text-sm font-medium text-muted-foreground',
-                item.disabled && 'cursor-not-allowed opacity-80'
-              )}
-            >
-              {item.title}
-            </a>
-          )
-      )}
-    </nav>
   );
 }

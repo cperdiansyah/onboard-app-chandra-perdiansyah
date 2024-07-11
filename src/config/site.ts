@@ -10,8 +10,19 @@ export const siteConfig = {
       href: '/',
     },
   ],
-  links: {
-    linkedin: 'https://www.linkedin.com/in/cperdiansyah/',
-    github: 'https://github.com/cperdiansyah',
+  externalLinks: {
+    title: 'About me',
+    links: [
+      {
+        title: 'LinkedIn',
+        href: 'https://www.linkedin.com/in/cperdiansyah/',
+        external: true,
+      },
+      {
+        title: 'Github',
+        href: 'https://github.com/cperdiansyah',
+        external: true,
+      },
+    ],
   },
 };

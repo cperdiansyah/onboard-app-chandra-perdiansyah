@@ -1,6 +1,16 @@
-import { LucideProps, Moon, SunMedium, X, Github, Linkedin } from 'lucide-react';
+import {
+  LucideProps,
+  Moon,
+  SunMedium,
+  X,
+  Github,
+  Linkedin,
+  SquareArrowOutUpRight,
+} from 'lucide-react';
 
 export type Icon = LucideProps;
+
+export type IconsType = typeof Icons;
 
 export const Icons = {
   sun: SunMedium,
@@ -8,4 +18,5 @@ export const Icons = {
   twitter: X,
   gitHub: Github,
   linkedin: Linkedin,
+  newPage: SquareArrowOutUpRight,
 };
