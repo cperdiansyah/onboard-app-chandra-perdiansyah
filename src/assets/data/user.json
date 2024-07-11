@@ -1,0 +1,22 @@
+[
+  {
+    "id": "$2y$10$uvwxyz01234567890abcdefghijklmnopqrstuvw",
+    "name": "Crew 1"
+  },
+  {
+    "id": "$2y$10$abcdefghijklmnopqrstuvwxyz0123456789",
+    "name": "Crew 2"
+  },
+  {
+    "id": "$2y$10$0987654321fedcba0123456789abcdefghijklmnop",
+    "name": "Crew 3"
+  },
+  {
+    "id": "$2y$10$lkjhgfdsa9876543210123456789abcdefghijklmnop",
+    "name": "Crew 4"
+  },
+  {
+    "id": "$2y$10$poiuytrewqasdfghjkl0123456789abcdefghijklmnop",
+    "name": "Crew 5"
+  }
+]
