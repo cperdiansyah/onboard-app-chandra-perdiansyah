@@ -11,7 +11,14 @@ export const useUserStore = create(
         users: InitialUserData || [],
         getUsers: () => get().users,
         getUserById: (id: string) => get().users.find((user) => user.id === id),
-
+        getUsersByName: (name: string) =>
+          get().users.filter((user) =>
+            user.name.toLowerCase().includes(name.toLowerCase())
+          ),
+        getUserByName: (name: string) =>
+          get().users.find((user) =>
+            user.name.toLowerCase().includes(name.toLowerCase())
+          ),
         addUser: (name: string) =>
           set((state) => ({
             users: [...state.users, { id: uuidv4(), name }],

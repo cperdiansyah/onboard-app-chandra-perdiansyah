@@ -2,13 +2,13 @@ import { create } from 'zustand';
 import { persist, devtools } from 'zustand/middleware';
 import { v4 as uuidv4 } from 'uuid';
 import { IScheduleStore } from '@/src/types/store/scheduleStoreType';
+import InitialScheduleData from '@src/assets/data/schedule.json';
 
 export const useScheduleStore = create(
   devtools(
     persist<IScheduleStore>(
       (set, get) => ({
-        schedules: [],
-
+        schedules: InitialScheduleData || [],
         getSchedules: () => get().schedules,
         getScheduleById: (id: string) =>
           get().schedules.find((schedule) => schedule.id === id),
@@ -16,6 +16,7 @@ export const useScheduleStore = create(
           start: string;
           end: string;
           userId: string;
+          user: string;
         }) =>
           set((state) => ({
             schedules: [...state.schedules, { id: uuidv4(), ...newSchedule }],
