@@ -1,9 +1,9 @@
-import React from 'react'
+import Layout from '@components/Layout';
+import React from 'react';
+// import Layout from '@components/Layout/index';
 
 const Home = () => {
-  return (
-    <div>Home</div>
-  )
-}
+  return <Layout>Home</Layout>;
+};
 
-export default Home
+export default Home;

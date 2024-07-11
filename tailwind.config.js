@@ -1,6 +1,8 @@
+const { fontFamily } = require('tailwindcss/defaultTheme');
+
 /** @type {import('tailwindcss').Config} */
 export default {
-  darkMode: ['selector'],
+  darkMode: ['class'],
   content: [
     './src/pages/**/*.{ts,tsx}',
     './src/components/**/*.{ts,tsx}',
@@ -76,6 +78,5 @@ export default {
       },
     },
   },
-  plugins: [],
+plugins: [require("tailwindcss-animate")],
 };
-
