@@ -1,41 +1,39 @@
 import dayGridPlugin from '@fullcalendar/daygrid';
+import momentPlugin from '@fullcalendar/moment';
 import FullCalendar from '@fullcalendar/react';
 import React from 'react';
 
+import {
+  ScheduleDataType
+} from '@src/types/store/scheduleStoreType';
 import { useScheduleStore } from '@store/scheduleStore';
 import './index.scss';
 
-const ScheduleCalendar: React.FC = () => {
-  const { schedules, addSchedule, removeSchedule } = useScheduleStore();
+interface ScheduleCalendarProps {
+  onAddSchedule: (dataSchedule: ScheduleDataType) => void;
+  onRemoveSchedule: (id: string) => void;
+}
 
-  const handleDateClick = (arg: any) => {
-    const title = prompt('Enter Event Title');
-    const userId = prompt('Enter User ID');
-    if (title && userId) {
-      // addSchedule(title, arg.dateStr, arg.dateStr, userId);
-    }
-  };
-
+const ScheduleCalendar: React.FC<ScheduleCalendarProps> = ({
+  
+  onAddSchedule,
+  onRemoveSchedule,
+}) => {
+  const { schedules } = useScheduleStore();
   return (
     <div className="w-50% schedule-calendar-container">
       <FullCalendar
-        height={500}
-        aspectRatio={0.5}
-        plugins={[dayGridPlugin]}
+        plugins={[dayGridPlugin, momentPlugin]}
         initialView="dayGridWeek"
         headerToolbar={{
           left: 'today',
           center: 'title',
           right: 'prev,next',
         }}
-        events={schedules.map((schedule) => ({
-          start: schedule.start,
-          end: schedule.end,
-          id: schedule.id,
-        }))}
+        events={schedules}
         eventClick={(info) => {
           if (window.confirm('Do you want to delete this event?')) {
-            removeSchedule(info.event.id);
+            onRemoveSchedule && onRemoveSchedule(info.event.id);
           }
         }}
       />
