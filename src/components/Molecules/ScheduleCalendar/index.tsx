@@ -3,12 +3,10 @@ import momentPlugin from '@fullcalendar/moment';
 import FullCalendar from '@fullcalendar/react';
 import React from 'react';
 
-import { ScheduleDataType } from '@src/types/store/scheduleStoreType';
 import { useScheduleStore } from '@store/scheduleStore';
 import './index.scss';
 
 interface ScheduleCalendarProps {
-  // onAddSchedule: (dataSchedule: ScheduleDataType) => void;
   onRemoveSchedule: (id: string) => void;
 }
 

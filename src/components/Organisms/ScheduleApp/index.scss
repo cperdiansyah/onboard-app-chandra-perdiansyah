@@ -6,8 +6,15 @@
     flex: 0 0 200px;
     border-right: 1px solid #ccc;
     padding: 0 1rem;
+    text-align: center;
   }
   &__schedule-calendar {
     flex: 1;
+  }
+
+  @media only screen and (max-width: 768px) {
+    &-container {
+      @apply flex flex-col;
+    }
   }
 }

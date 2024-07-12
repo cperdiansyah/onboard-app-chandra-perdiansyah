@@ -1,0 +1,24 @@
+$slug-colors: (
+  'crew-1': #ffcccc,
+  'crew-2': #ccffcc,
+  'crew-3': #ccccff,
+);
+
+@function get-slug-color($slug) {
+  @return map-get($slug-colors, $slug);
+}
+
+@mixin slug-styles($slug) {
+  background-color: get-slug-color($slug);
+  border: 1px solid get-slug-color($slug);
+  @apply text-slate-700 font-semibold;
+  .fc-event-title {
+    @apply text-slate-700 font-semibold;
+  }
+}
+
+@each $slug, $color in $slug-colors {
+  .#{$slug} {
+    @include slug-styles($slug);
+  }
+}
