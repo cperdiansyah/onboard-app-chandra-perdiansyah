@@ -1,5 +1,10 @@
 import { Button } from '@components/ui/button';
-import { Dialog, DialogContent, DialogTrigger } from '@components/ui/dialog';
+import {
+  Dialog,
+  DialogContent,
+  DialogTitle,
+  DialogTrigger,
+} from '@components/ui/dialog';
 import ListWeeksCalendar from '@src/components/Molecules/ListWeeksCalendar';
 import { useScheduleStore } from '@src/store/scheduleStore';
 
@@ -21,6 +26,7 @@ const ModalUserList: React.FC<IModalUserList> = (props) => {
         </Button>
       </DialogTrigger>
       <DialogContent className="min-w-[50%] sm:max-w-[425px]">
+        <DialogTitle />
         <ListWeeksCalendar events={getSchedulesByIdUser(userId)} />
       </DialogContent>
     </Dialog>
