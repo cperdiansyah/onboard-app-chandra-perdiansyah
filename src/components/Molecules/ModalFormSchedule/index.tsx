@@ -29,7 +29,7 @@ export interface IModalFormSchedule {
 }
 
 interface IModalForm {
-  user?: User;
+  user?: User | undefined;
   start?: Date | undefined;
   end?: Date | undefined;
 }
@@ -106,6 +106,7 @@ const ModalFormSchedule = (props: IModalFormSchedule) => {
       onAddSchedule(submitedScheduleData);
       toast.success('Schedule has been created');
       setOpenDialog(false);
+      setFormValue({});
     }
   };
 
@@ -150,7 +151,6 @@ const ModalFormSchedule = (props: IModalFormSchedule) => {
                     value: date,
                   })
                 }
-                className="mt-3"
               />
               {formError.start && (
                 <span className="font-medium text-red-500 text-sm">
