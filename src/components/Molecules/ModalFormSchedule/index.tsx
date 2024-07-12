@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 
+import Combobox, { ICombobox } from '@components/Molecules/Combobox';
 import { Button } from '@components/ui/button';
 import {
   Dialog,
@@ -9,11 +10,10 @@ import {
   DialogTitle,
   DialogTrigger,
 } from '@components/ui/dialog';
-import { Input } from '@components/ui/input';
 import { Label } from '@components/ui/label';
-import { User } from '@src/types/store/userStoreType';
-import Combobox, { ICombobox } from '@components/Molecules/Combobox';
+import DatePicker from '@src/components/Molecules/DatePicker';
 import { useUserStore } from '@src/store/userStore';
+import { User } from '@src/types/store/userStoreType';
 
 export interface IModalFormSchedule {
   buttonTitle?: string;
@@ -22,16 +22,15 @@ export interface IModalFormSchedule {
 
 interface IModalForm {
   user?: User;
-  start?: string;
-  end?: string;
+  start?: Date | undefined;
+  end?: Date | undefined;
 }
 
 const ModalFormSchedule = (props: IModalFormSchedule) => {
   const { buttonTitle = 'Open', users } = props;
   const { getUserById } = useUserStore();
 
-  const [open, setOpen] = useState(false);
-  const [comboboxValue, setComboboxValue] = useState<string>();
+  const [openDialog, setOpenDialog] = useState(false);
   const [comboboxItem, setComboboxItem] = useState<ICombobox['items']>();
   const [formValue, setFormValue] = useState<IModalForm>();
   useEffect(() => {
@@ -51,13 +50,25 @@ const ModalFormSchedule = (props: IModalFormSchedule) => {
       ...state,
       user,
     }));
-    setComboboxValue(comboboxValue);
   };
+  const handleChangeDatePicker = (values: {
+    key: keyof IModalForm;
+    value: Date | undefined;
+  }) => {
+    const { key, value } = values;
+    setFormValue((state) => ({
+      ...state,
+      [key]: value,
+    }));
+  };
+
   const submitButton = async () => {
-    setOpen(false);
+    setOpenDialog(false);
   };
+
+  console.log(formValue);
   return (
-    <Dialog open={open} onOpenChange={setOpen}>
+    <Dialog open={openDialog} onOpenChange={setOpenDialog}>
       <DialogTrigger>
         <Button variant="outline" className="shadow-sm">
           {buttonTitle}
@@ -75,29 +86,41 @@ const ModalFormSchedule = (props: IModalFormSchedule) => {
             <Combobox
               items={comboboxItem}
               onSelect={handleComboboxSelect}
-              value={comboboxValue}
+              value={formValue?.user?.id}
               title="User"
             />
           </div>
-          <div className="items-center gap-4 grid grid-cols-4">
-            <Label htmlFor="name" className="text-right">
-              Name
-            </Label>
-            <Input
-              id="name"
-              defaultValue="Pedro Duarte"
-              className="col-span-3"
-            />
-          </div>
-          <div className="items-center gap-4 grid grid-cols-4">
-            <Label htmlFor="username" className="text-right">
-              Username
-            </Label>
-            <Input
-              id="username"
-              defaultValue="@peduarte"
-              className="col-span-3"
-            />
+          <div className="items-center gap-4 grid grid-cols-2">
+            <div className="date-picker-container">
+              <Label htmlFor="name" className="text-right">
+                Start
+              </Label>
+              <DatePicker
+                date={formValue?.start}
+                setDate={(date: Date | undefined) =>
+                  handleChangeDatePicker({
+                    key: 'start',
+                    value: date,
+                  })
+                }
+                className="mt-3"
+              />
+            </div>
+            <div className="date-picker-container">
+              <Label htmlFor="name" className="text-right">
+                End
+              </Label>
+              <DatePicker
+                date={formValue?.start}
+                setDate={(date: Date | undefined) =>
+                  handleChangeDatePicker({
+                    key: 'end',
+                    value: date,
+                  })
+                }
+                className="mt-3"
+              />
+            </div>
           </div>
         </div>
         <DialogFooter className="sm:justify-start">

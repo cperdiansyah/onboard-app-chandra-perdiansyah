@@ -29,7 +29,6 @@ const ScheduleCalendar: React.FC<ScheduleCalendarProps> = ({
         }}
         events={schedules}
         eventClick={(info) => {
-          console.log(info);
           if (
             window.confirm(
               `Do you want to delete this schedule? ${info.event?.extendedProps.user} - ${info.event.title}`
