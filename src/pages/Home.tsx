@@ -1,8 +1,15 @@
 import Layout from '@components/Layout';
 import { Button } from '@components/ui/button';
 import ScheduleApp from '@components/Organisms/ScheduleApp';
+import { useScheduleStore } from '@/src/store/scheduleStore';
 
 const Home = () => {
+  const { removeSchedule, addSchedule } = useScheduleStore();
+
+  const onRemoveShedule = (id: string) => {
+    removeSchedule(id);
+  };
+  const onAddSchedule = () => {};
   return (
     <Layout>
       <div className="flex justify-between mt-5 container header-form">
@@ -11,7 +18,10 @@ const Home = () => {
           Add Schedule
         </Button>
       </div>
-      <ScheduleApp />
+      <ScheduleApp
+        onRemoveSchedule={onRemoveShedule}
+        onAddSchedule={onAddSchedule}
+      />
     </Layout>
   );
 };

@@ -3,9 +3,7 @@ import momentPlugin from '@fullcalendar/moment';
 import FullCalendar from '@fullcalendar/react';
 import React from 'react';
 
-import {
-  ScheduleDataType
-} from '@src/types/store/scheduleStoreType';
+import { ScheduleDataType } from '@src/types/store/scheduleStoreType';
 import { useScheduleStore } from '@store/scheduleStore';
 import './index.scss';
 
@@ -15,7 +13,6 @@ interface ScheduleCalendarProps {
 }
 
 const ScheduleCalendar: React.FC<ScheduleCalendarProps> = ({
-  
   onAddSchedule,
   onRemoveSchedule,
 }) => {
@@ -32,7 +29,12 @@ const ScheduleCalendar: React.FC<ScheduleCalendarProps> = ({
         }}
         events={schedules}
         eventClick={(info) => {
-          if (window.confirm('Do you want to delete this event?')) {
+          console.log(info);
+          if (
+            window.confirm(
+              `Do you want to delete this schedule? ${info.event?.extendedProps.user} - ${info.event.title}`
+            )
+          ) {
             onRemoveSchedule && onRemoveSchedule(info.event.id);
           }
         }}
