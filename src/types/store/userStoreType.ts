@@ -5,6 +5,7 @@ interface IUserProps {
 export interface IUserStore extends IUserProps {
   getUsers: () => User[];
   getUserById: (id: string) => User | undefined;
+  getTotalUser: () => number;
   addUser: (name: string) => void;
   updateUser: (id: string, newName: string) => void;
   removeUser: (id: string) => void;

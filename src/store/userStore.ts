@@ -1,9 +1,8 @@
-import { create } from 'zustand';
-import { persist, devtools } from 'zustand/middleware';
-import { v4 as uuidv4 } from 'uuid';
 import { IUserStore } from '@/src/types/store/userStoreType';
 import InitialUserData from '@src/assets/data/user.json';
-
+import { v4 as uuidv4 } from 'uuid';
+import { create } from 'zustand';
+import { devtools, persist } from 'zustand/middleware';
 export const useUserStore = create(
   devtools(
     persist<IUserStore>(
@@ -19,6 +18,7 @@ export const useUserStore = create(
           get().users.find((user) =>
             user.name.toLowerCase().includes(name.toLowerCase())
           ),
+        getTotalUser: (): number => get().users?.length,
         addUser: (name: string) =>
           set((state) => ({
             users: [...state.users, { id: uuidv4(), name }],
