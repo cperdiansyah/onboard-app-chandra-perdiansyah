@@ -1,17 +1,11 @@
-import Combobox, { ICombobox } from '@components/Molecules/Combobox';
-import { Button } from '@components/ui/button';
-import { Label } from '@components/ui/label';
-import DatePicker from '@src/components/Molecules/DatePicker';
-import { useUserStore } from '@src/store/userStore';
-import { User } from '@src/types/store/userStoreType';
-import { useEffect, useState } from 'react';
-// import isEmpty from 'lodash';
 import {
   convertDateMoment,
   createSlug,
   generateTitleSchedule,
 } from '@/src/lib/helpers';
 import { ScheduleDataType } from '@/src/types/store/scheduleStoreType';
+import Combobox, { ICombobox } from '@components/Molecules/Combobox';
+import { Button } from '@components/ui/button';
 import {
   Dialog,
   DialogContent,
@@ -20,6 +14,12 @@ import {
   DialogTitle,
   DialogTrigger,
 } from '@components/ui/dialog';
+import { Label } from '@components/ui/label';
+import DatePicker from '@src/components/Molecules/DatePicker';
+import { useUserStore } from '@src/store/userStore';
+import { User } from '@src/types/store/userStoreType';
+import { useEffect, useState } from 'react';
+import { toast } from 'sonner';
 
 export interface IModalFormSchedule {
   buttonTitle?: string;
@@ -103,6 +103,7 @@ const ModalFormSchedule = (props: IModalFormSchedule) => {
         user: formValue?.user?.name || '',
       };
       onAddSchedule(submitedScheduleData);
+      toast.success('Schedule has been created');
       setOpenDialog(false);
     }
   };
@@ -129,6 +130,11 @@ const ModalFormSchedule = (props: IModalFormSchedule) => {
               value={formValue?.user?.id}
               title="User"
             />
+            {formError.user && (
+              <span className="font-medium text-red-500 text-sm">
+                User Required!
+              </span>
+            )}
           </div>
           <div className="items-center gap-4 grid grid-cols-2">
             <div className="date-picker-container">
@@ -145,6 +151,11 @@ const ModalFormSchedule = (props: IModalFormSchedule) => {
                 }
                 className="mt-3"
               />
+              {formError.start && (
+                <span className="font-medium text-red-500 text-sm">
+                  Start Date Required!
+                </span>
+              )}
             </div>
             <div className="date-picker-container">
               <Label htmlFor="name" className="text-right">
@@ -158,8 +169,12 @@ const ModalFormSchedule = (props: IModalFormSchedule) => {
                     value: date,
                   })
                 }
-                className="mt-3"
               />
+              {formError.end && (
+                <span className="font-medium text-red-500 text-sm">
+                  End Date Required!
+                </span>
+              )}
             </div>
           </div>
         </div>

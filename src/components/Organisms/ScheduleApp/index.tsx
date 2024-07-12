@@ -1,9 +1,7 @@
-import React from 'react';
 import ScheduleCalendar from '@components/Molecules/ScheduleCalendar';
 import UserList from '@components/Molecules/UserList';
-import { useScheduleStore } from '@store/scheduleStore';
+import React from 'react';
 import './index.scss';
-import { ScheduleDataType } from '@/src/types/store/scheduleStoreType';
 
 interface IScheduleApp {
   onRemoveSchedule: (id: string) => void;
