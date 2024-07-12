@@ -8,12 +8,11 @@ import { useScheduleStore } from '@store/scheduleStore';
 import './index.scss';
 
 interface ScheduleCalendarProps {
-  onAddSchedule: (dataSchedule: ScheduleDataType) => void;
+  // onAddSchedule: (dataSchedule: ScheduleDataType) => void;
   onRemoveSchedule: (id: string) => void;
 }
 
 const ScheduleCalendar: React.FC<ScheduleCalendarProps> = ({
-  onAddSchedule,
   onRemoveSchedule,
 }) => {
   const { schedules } = useScheduleStore();

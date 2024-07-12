@@ -6,7 +6,6 @@ import './index.scss';
 import { ScheduleDataType } from '@/src/types/store/scheduleStoreType';
 
 interface IScheduleApp {
-  onAddSchedule: (dataSchedule: ScheduleDataType) => void;
   onRemoveSchedule: (id: string) => void;
 }
 

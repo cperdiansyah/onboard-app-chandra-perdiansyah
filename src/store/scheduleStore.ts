@@ -1,4 +1,4 @@
-import { convertDateMoment, createSlug } from '@/src/lib/helpers';
+import { convertDateMoment, createSlug, generateTitleSchedule } from '@/src/lib/helpers';
 import {
   IScheduleStore,
   ScheduleDataType,
@@ -8,12 +8,7 @@ import { v4 as uuidv4 } from 'uuid';
 import { create } from 'zustand';
 import { devtools, persist } from 'zustand/middleware';
 
-const generateTitleSchedule = (
-  startDate: ScheduleDataType['start'],
-  endDate: ScheduleDataType['end']
-) => {
-  return `${convertDateMoment(startDate, 'DD MMM')} - ${convertDateMoment(endDate, 'DD MMM')}`;
-};
+
 const parsedDateInitialScheduleData = InitialScheduleData?.map(
   (item) => ({
     ...item,

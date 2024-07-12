@@ -1,7 +1,8 @@
+import { ScheduleDataType } from '@src/types/store/scheduleStoreType';
 import moment from 'moment';
 
 export const convertDateMoment = (
-  dateString: string,
+  dateString: Date | undefined | string,
   format: string = 'YYYY-MM-DD'
 ) => moment(dateString).format(format);
 
@@ -12,3 +13,10 @@ export const createSlug = (text: string) =>
     .replace(/\s+/g, '-')
     .replace(/--+/g, '-')
     .replace(/^-|-$/g, '');
+
+export const generateTitleSchedule = (
+  startDate: ScheduleDataType['start'],
+  endDate: ScheduleDataType['end']
+) => {
+  return `${convertDateMoment(startDate, 'DD MMM')} - ${convertDateMoment(endDate, 'DD MMM')}`;
+};

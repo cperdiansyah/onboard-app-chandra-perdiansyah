@@ -12,8 +12,8 @@ export type ScheduleType = {
 
 export type ScheduleDataType = {
   userId: string;
-  start: string;
-  end: string;
+  start: Date | undefined | string;
+  end: Date | undefined | string;
   user: string;
   title?: string;
   className?: string;

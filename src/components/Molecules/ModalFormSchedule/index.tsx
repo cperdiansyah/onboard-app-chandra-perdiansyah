@@ -1,7 +1,17 @@
-import { useEffect, useState } from 'react';
-
 import Combobox, { ICombobox } from '@components/Molecules/Combobox';
 import { Button } from '@components/ui/button';
+import { Label } from '@components/ui/label';
+import DatePicker from '@src/components/Molecules/DatePicker';
+import { useUserStore } from '@src/store/userStore';
+import { User } from '@src/types/store/userStoreType';
+import { useEffect, useState } from 'react';
+// import isEmpty from 'lodash';
+import {
+  convertDateMoment,
+  createSlug,
+  generateTitleSchedule,
+} from '@/src/lib/helpers';
+import { ScheduleDataType } from '@/src/types/store/scheduleStoreType';
 import {
   Dialog,
   DialogContent,
@@ -10,14 +20,11 @@ import {
   DialogTitle,
   DialogTrigger,
 } from '@components/ui/dialog';
-import { Label } from '@components/ui/label';
-import DatePicker from '@src/components/Molecules/DatePicker';
-import { useUserStore } from '@src/store/userStore';
-import { User } from '@src/types/store/userStoreType';
 
 export interface IModalFormSchedule {
   buttonTitle?: string;
   users: User[];
+  onAddSchedule: (dataSchedule: ScheduleDataType) => void;
 }
 
 interface IModalForm {
@@ -27,12 +34,18 @@ interface IModalForm {
 }
 
 const ModalFormSchedule = (props: IModalFormSchedule) => {
-  const { buttonTitle = 'Open', users } = props;
+  const { buttonTitle = 'Open', users, onAddSchedule } = props;
   const { getUserById } = useUserStore();
 
   const [openDialog, setOpenDialog] = useState(false);
   const [comboboxItem, setComboboxItem] = useState<ICombobox['items']>();
   const [formValue, setFormValue] = useState<IModalForm>();
+  const [formError, setFormError] = useState<Record<string, boolean>>({
+    user: false,
+    start: false,
+    end: false,
+  });
+
   useEffect(() => {
     const newItems = users?.map(
       (user) => ({
@@ -62,11 +75,38 @@ const ModalFormSchedule = (props: IModalFormSchedule) => {
     }));
   };
 
-  const submitButton = async () => {
-    setOpenDialog(false);
+  const onSubmit = async () => {
+    const errors: Record<string, boolean> = {};
+
+    for (const key of ['user', 'start', 'end'] as const) {
+      const fieldValue: unknown = formValue?.[key];
+      if (
+        !fieldValue ||
+        (typeof fieldValue === 'string' && fieldValue.trim() === '') ||
+        (fieldValue instanceof Date && isNaN(fieldValue.getTime()))
+      ) {
+        errors[key] = true;
+        break;
+      } else {
+        errors[key] = false;
+      }
+    }
+    setFormError(errors);
+
+    if (!Object.values(errors).includes(true)) {
+      const submitedScheduleData: ScheduleDataType = {
+        end: convertDateMoment(formValue?.end),
+        start: convertDateMoment(formValue?.start),
+        title: generateTitleSchedule(formValue?.start, formValue?.end),
+        className: createSlug(formValue?.user?.name || ''),
+        userId: formValue?.user?.id || '',
+        user: formValue?.user?.name || '',
+      };
+      onAddSchedule(submitedScheduleData);
+      setOpenDialog(false);
+    }
   };
 
-  console.log(formValue);
   return (
     <Dialog open={openDialog} onOpenChange={setOpenDialog}>
       <DialogTrigger>
@@ -111,7 +151,7 @@ const ModalFormSchedule = (props: IModalFormSchedule) => {
                 End
               </Label>
               <DatePicker
-                date={formValue?.start}
+                date={formValue?.end}
                 setDate={(date: Date | undefined) =>
                   handleChangeDatePicker({
                     key: 'end',
@@ -128,7 +168,7 @@ const ModalFormSchedule = (props: IModalFormSchedule) => {
             type="button"
             variant="default"
             className="w-full"
-            onClick={submitButton}
+            onClick={onSubmit}
           >
             Submit
           </Button>
