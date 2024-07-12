@@ -1,7 +1,9 @@
 import {
   convertDateMoment,
   createSlug,
+  endOfDay,
   generateTitleSchedule,
+  startOfDay,
 } from '@/src/lib/helpers';
 import { ScheduleDataType } from '@/src/types/store/scheduleStoreType';
 import Combobox, { ICombobox } from '@components/Molecules/Combobox';
@@ -95,8 +97,8 @@ const ModalFormSchedule = (props: IModalFormSchedule) => {
 
     if (!Object.values(errors).includes(true)) {
       const submitedScheduleData: ScheduleDataType = {
-        end: convertDateMoment(formValue?.end),
-        start: convertDateMoment(formValue?.start),
+        end: endOfDay(formValue?.end),
+        start: startOfDay(formValue?.start),
         title: generateTitleSchedule(formValue?.start, formValue?.end),
         className: createSlug(formValue?.user?.name || ''),
         userId: formValue?.user?.id || '',

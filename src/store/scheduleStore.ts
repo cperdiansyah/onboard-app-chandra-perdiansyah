@@ -1,7 +1,8 @@
 import {
-  convertDateMoment,
   createSlug,
+  endOfDay,
   generateTitleSchedule,
+  startOfDay
 } from '@/src/lib/helpers';
 import {
   IScheduleStore,
@@ -15,8 +16,8 @@ import { devtools, persist } from 'zustand/middleware';
 const parsedDateInitialScheduleData = InitialScheduleData?.map(
   (item) => ({
     ...item,
-    end: convertDateMoment(item.end),
-    start: convertDateMoment(item.start),
+    end: endOfDay(item.end),
+    start: startOfDay(item.start),
     title: generateTitleSchedule(item.start, item.end),
     className: createSlug(item.user),
   }),
@@ -40,8 +41,8 @@ export const useScheduleStore = create(
               {
                 ...newSchedule,
                 id: uuidv4(),
-                end: convertDateMoment(newSchedule.end),
-                start: convertDateMoment(newSchedule.start),
+                end: endOfDay(newSchedule.end),
+                start: startOfDay(newSchedule.start),
                 title: generateTitleSchedule(
                   newSchedule.start,
                   newSchedule.end

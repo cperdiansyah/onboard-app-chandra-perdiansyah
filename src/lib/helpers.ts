@@ -20,3 +20,11 @@ export const generateTitleSchedule = (
 ) => {
   return `${convertDateMoment(startDate, 'DD MMM')} - ${convertDateMoment(endDate, 'DD MMM')}`;
 };
+
+// Get start of the current day
+export const startOfDay = (date: Date | undefined | string) =>
+  moment(date).startOf('day').format('YYYY-MM-DD HH:mm:ss');
+
+// Get end of the current day
+export const endOfDay = (date: Date | undefined | string) =>
+  moment(date).endOf('day').format('YYYY-MM-DD HH:mm:ss');
