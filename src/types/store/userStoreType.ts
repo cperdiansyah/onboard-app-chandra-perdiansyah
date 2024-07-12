@@ -13,7 +13,7 @@ export interface IUserStore extends IUserProps {
   getUserByName: (name: string) => User | undefined;
 }
 
-type User = {
+export type User = {
   id: string;
   name: string;
 };

@@ -1,10 +1,12 @@
-import Layout from '@components/Layout';
-import { Button } from '@components/ui/button';
-import ScheduleApp from '@components/Organisms/ScheduleApp';
 import { useScheduleStore } from '@/src/store/scheduleStore';
+import { useUserStore } from '@/src/store/userStore';
+import Layout from '@components/Layout';
+import ModalFormSchedule from '@components/Molecules/ModalFormSchedule';
+import ScheduleApp from '@components/Organisms/ScheduleApp';
 
 const Home = () => {
   const { removeSchedule, addSchedule } = useScheduleStore();
+  const { users, addUser, removeUser } = useUserStore();
 
   const onRemoveShedule = (id: string) => {
     removeSchedule(id);
@@ -14,9 +16,7 @@ const Home = () => {
     <Layout>
       <div className="flex justify-between mt-5 container header-form">
         <h4 className="font-semibold text-xl tracking-tight">Schedule</h4>
-        <Button variant="outline" className="shadow-sm">
-          Add Schedule
-        </Button>
+        <ModalFormSchedule buttonTitle="Add Schedule" users={users} />
       </div>
       <ScheduleApp
         onRemoveSchedule={onRemoveShedule}
