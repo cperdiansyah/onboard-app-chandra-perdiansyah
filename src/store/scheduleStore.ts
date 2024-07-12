@@ -1,4 +1,8 @@
-import { convertDateMoment, createSlug, generateTitleSchedule } from '@/src/lib/helpers';
+import {
+  convertDateMoment,
+  createSlug,
+  generateTitleSchedule,
+} from '@/src/lib/helpers';
 import {
   IScheduleStore,
   ScheduleDataType,
@@ -7,7 +11,6 @@ import InitialScheduleData from '@src/assets/data/schedule.json';
 import { v4 as uuidv4 } from 'uuid';
 import { create } from 'zustand';
 import { devtools, persist } from 'zustand/middleware';
-
 
 const parsedDateInitialScheduleData = InitialScheduleData?.map(
   (item) => ({
@@ -28,6 +31,8 @@ export const useScheduleStore = create(
         getSchedules: () => get().schedules,
         getScheduleById: (id: string) =>
           get().schedules.find((schedule) => schedule.id === id),
+        getSchedulesByIdUser: (userId: string) =>
+          get().schedules.filter((schedule) => schedule.userId === userId),
         addSchedule: (newSchedule: ScheduleDataType) =>
           set((state) => ({
             schedules: [

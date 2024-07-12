@@ -2,6 +2,7 @@ export interface IScheduleStore {
   schedules: ScheduleType[];
   getSchedules: () => ScheduleType[];
   getScheduleById: (id: string) => ScheduleType | undefined;
+  getSchedulesByIdUser: (id: string) => ScheduleType[];
   addSchedule: (newSchedule: ScheduleDataType) => void;
   removeSchedule: (id: string) => void;
   updateSchedule: (id: string, updatedSchedule: ScheduleDataType) => void;
